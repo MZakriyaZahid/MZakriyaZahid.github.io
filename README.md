@@ -1,12 +1,79 @@
 # MZakriyaZahid.github.io
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Awesome Projects</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakriya Zahid - Portfolio</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>Welcome to My Portfolio!</h1>
-  <p>This is where I'll showcase my passion projects.</p>
-</body>
-</html>
+
+    <div class="container">
+        <header>
+            <h1>Zakriya Zahid</h1>
+            <p>
+                <a href="mailto:zakriya.zahid.me@gmail.com">zakriya.zahid.me@gmail.com</a> | 
+                London, England | 
+                <a href="https://www.linkedin.com/in/zakriya-zahid-502685237/">LinkedIn Profile</a>
+            </p>
+        </header>
+
+        <section id="summary">
+            <h2>Professional Summary</h2>
+            <p>
+                Ambitious and globally minded Economics graduate with international work experience in Riyadh and strong analytical, communication and leadership skills. Proven ability to work with diverse stakeholders, manage projects in fast-paced environments, and deliver solutions that improve efficiency and decision-making.
+            </p>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <p>
+                <strong>BSc Economics (Hons.)</strong> - University of Greenwich <br>
+                <em>September 2022 - July 2025</em>
+            </p>
+        </section>
+
+        <section id="experience">
+            <h2>Work Experience</h2>
+            <p>
+                <strong>Data Management and Process Improvement Intern</strong> <br>
+                Golden Glass Protection, Riyadh, Saudi Arabia <br>
+                <em>Jun. 2023 - Sept. 2023</em>
+            </p>
+            <ul>
+                <li>Designed interactive dashboards and streamlined processes, improving efficiency by 27.7%.</li>
+                <li>Supported strategy development through performance reporting, showcasing commercial awareness.</li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <p>
+                <strong>Dissertation: Assessing the Impact of Corruption on Economic Growth</strong> <br>
+                Conducted cross
