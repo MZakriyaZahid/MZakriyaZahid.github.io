@@ -4,100 +4,250 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zakriya Zahid - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        .nav-link {
+            transition: color 0.3s ease;
         }
-        h1, h2, h3 {
-            color: #0056b3;
+        .nav-link:hover {
+            color: #3b82f6;
         }
-        a {
-            color: #0056b3;
-            text-decoration: none;
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        blockquote {
-            border-left: 3px solid #ddd;
-            padding-left: 15px;
-            margin: 15px 0 15px 5px;
-            color: #555;
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .skill-tag {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .skill-tag:hover {
+            background-color: #3b82f6;
+            color: white;
+        }
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <div class="container">
-        <header>
-            [cite_start]<h1>Zakriya Zahid [cite: 1]</h1>
-            <p>
-                [cite_start]<a href="mailto:zakriya.zahid.me@gmail.com">zakriya.zahid.me@gmail.com [cite: 1]</a> | 
-                [cite_start]London, England [cite: 1] | 
-                [cite_start]<a href="https://www.linkedin.com/in/zakriya-zahid-502685237/">LinkedIn Profile [cite: 1]</a>
-            </p>
-        </header>
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-gray-800">
+                    <a href="#">Zakriya Zahid</a>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="nav-link text-gray-600 font-medium">About</a>
+                    <a href="#experience" class="nav-link text-gray-600 font-medium">Experience</a>
+                    <a href="#projects" class="nav-link text-gray-600 font-medium">Projects</a>
+                    <a href="#skills" class="nav-link text-gray-600 font-medium">Skills</a>
+                    <a href="#contact" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Contact</a>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-200">About</a>
+            <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-200">Experience</a>
+            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-gray-200">Projects</a>
+            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-gray-200">Skills</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-200">Contact</a>
+        </div>
+    </header>
 
-        <section id="summary">
-            [cite_start]<h2>Professional Summary [cite: 2]</h2>
-            <p>
-                [cite_start]Ambitious and globally minded Economics graduate with international work experience in Riyadh and strong analytical, communication and leadership skills. [cite: 3] [cite_start]Proven ability to work with diverse stakeholders, manage projects in fast-paced environments, and deliver solutions that improve efficiency and decision-making. [cite: 4]
-            </p>
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section id="home" class="container mx-auto px-6 py-16 md:py-24 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4 leading-tight">Ambitious Economics Graduate & Data Analyst</h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-8">Transforming data into actionable insights and driving efficiency through innovative solutions.</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#projects" class="bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors text-lg">View My Work</a>
+                    <a href="Muhammad Zakriya Zahid CV 1.pdf" download class="bg-gray-200 text-gray-800 px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition-colors text-lg">Download CV</a>
+                </div>
+            </div>
         </section>
 
-        <section id="education">
-            [cite_start]<h2>Education [cite: 7]</h2>
-            <p>
-                [cite_start]<strong>BSc Economics (Hons.) [cite: 9][cite_start]</strong> - University of Greenwich [cite: 8] <br>
-                [cite_start]<em>September 2022 - July 2025 [cite: 10]</em>
-            </p>
+        <!-- About Section -->
+        <section id="about" class="bg-white py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-5 gap-12 items-center">
+                    <div class="md:col-span-2">
+                         <img src="https://placehold.co/400x400/e2e8f0/334155?text=ZZ" alt="Zakriya Zahid" class="rounded-full mx-auto md:mx-0 shadow-lg w-64 h-64 md:w-80 md:h-80 object-cover">
+                    </div>
+                    <div class="md:col-span-3">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">About Me</h2>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            I am a globally minded Economics graduate from the University of Greenwich with international work experience in Riyadh. My background has equipped me with strong analytical, communication, and leadership skills. I thrive in fast-paced environments, where I enjoy working with diverse stakeholders to deliver solutions that enhance efficiency and support decision-making.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Adaptable and curious, I am eager to build a career in global management, focusing on international rotations, cross-cultural collaboration, and continuous learning to make a meaningful impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="experience">
-            [cite_start]<h2>Work Experience [cite: 15]</h2>
-            <p>
-                [cite_start]<strong>Data Management and Process Improvement Intern [cite: 17]</strong> <br>
-                [cite_start]Golden Glass Protection, Riyadh, Saudi Arabia [cite: 16, 19] <br>
-                <em>Jun. [cite_start]2023 - Sept. 2023 [cite: 18]</em>
-            </p>
-            <ul>
-                [cite_start]<li>Designed interactive dashboards and streamlined processes, improving efficiency by 27.7%. [cite: 21]</li>
-                [cite_start]<li>Supported strategy development through performance reporting, showcasing commercial awareness and problem-solving. [cite: 23]</li>
-            </ul>
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Professional Experience</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Data Management and Process Improvement Intern</h3>
+                                <p class="text-blue-500 font-medium mb-2">Golden Glass Protection</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-gray-500 font-medium">Jun 2023 - Sep 2023</p>
+                                <p class="text-gray-500">Riyadh, Saudi Arabia</p>
+                            </div>
+                        </div>
+                        <ul class="mt-4 list-disc list-inside text-gray-600 space-y-2">
+                            <li>Adapted quickly to a new international working environment, collaborating with senior leadership across cultural and organisational boundaries.</li>
+                            <li>Designed interactive dashboards and streamlined processes, improving efficiency by 27.7% and building strong client relationships.</li>
+                            <li>Delivered training workshops to colleagues, demonstrating leadership, communication and coaching ability.</li>
+                            <li>Supported strategy development through performance reporting, showcasing commercial awareness and problem-solving.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="projects">
-            [cite_start]<h2>Projects [cite: 24]</h2>
-            <p>
-                [cite_start]<strong>Dissertation: Assessing the Impact of Corruption on Economic Growth [cite: 25]</strong><br>
-                [cite_start]Conducted cross-country analysis of corruption's impact on economic growth, applying international datasets, policy evaluation and advanced data modelling. [cite: 11]
-            </p>
-            
-            <blockquote>
-                <h3>Project Details:</h3>
-                <ul>
-                    [cite_start]<li><strong>Statistical Modelling:</strong> Applied statistical modelling with Excel and Python, conducting reconciliations and consistency checks similar to financial audits. [cite: 25]</li>
-                    [cite_start]<li><strong>Policy Analysis:</strong> Produced policy-driven insights, reflecting interest in global economic development and governance. [cite: 27]</li>
-                </ul>
-            </blockquote>
-            
-            <p>
-                [cite_start]<strong>Southeastern Assessment Centre - Route Performance Visualization [cite: 28]</strong><br>
-                [cite_start]Built dashboards and presented findings to decision-makers, demonstrating confidence in influencing senior stakeholders and turning complex analysis into clear recommendations. [cite: 28, 29]
-            </p>
+
+        <!-- Projects Section -->
+        <section id="projects" class="bg-white py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Passion Projects</h2>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Project 1 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden border border-gray-200">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dissertation: Impact of Corruption on Economic Growth</h3>
+                            <p class="text-gray-600 mb-4">A cross-country analysis applying statistical modelling with Excel and Python to investigate the effects of corruption on economic growth, producing policy-driven insights.</p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-blue-500 font-semibold hover:underline">View Analysis</a>
+                                <a href="#" class="text-blue-500 font-semibold hover:underline">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card bg-white rounded-lg overflow-hidden border border-gray-200">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Southeastern Assessment Centre: Route Performance Visualization</h3>
+                            <p class="text-gray-600 mb-4">Built and presented dashboards to decision-makers, turning complex route performance analysis into clear, actionable recommendations for senior stakeholders.</p>
+                             <div class="flex space-x-4">
+                                <a href="#" class="text-blue-500 font-semibold hover:underline">View Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-    </div>
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-12">Skills & Certifications</h2>
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-6">Technical Skills</h3>
+                    <div class="flex flex-wrap justify-center gap-4 mb-10">
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Advanced Excel</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Python</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Power BI</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Data Analysis</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Data Visualization</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Statistical Modelling</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-6">Professional Skills</h3>
+                     <div class="flex flex-wrap justify-center gap-4 mb-10">
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Stakeholder Engagement</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Project Management</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Cross-cultural Communication</span>
+                        <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium">Leadership & Mentoring</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-6">Certifications</h3>
+                     <div class="flex flex-wrap justify-center gap-4">
+                        <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Excel & ChatGPT: Data Analysis Power Tips</span>
+                        <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Microsoft Power BI (In Progress)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Contact Section -->
+        <section id="contact" class="bg-white py-20 md:py-28 reveal">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Get In Touch</h2>
+                 <p class="text-gray-600 mb-8 max-w-2xl mx-auto">I'm currently seeking new opportunities and would love to hear from you. Whether you have a question or just want to say hi, feel free to reach out.</p>
+                 <a href="mailto:zakriya.zahid.me@gmail.com" class="inline-block bg-blue-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-600 transition-colors text-lg">Say Hello</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://www.linkedin.com" target="_blank" class="hover:text-blue-400 transition-colors">LinkedIn</a>
+                <!-- Add other social links here -->
+            </div>
+            <p>&copy; 2025 Zakriya Zahid. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // initial check
+    </script>
 </body>
 </html>
