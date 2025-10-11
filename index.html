@@ -5,28 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zakriya Zahid - Data Analyst Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Share Tech Mono', monospace;
-            background-color: #000;
-            color: #00FF41; /* Matrix Green */
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f; /* Dark Navy */
+            color: #ccd6f6; /* Light Slate */
         }
-        #matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.3;
+        .font-mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .body-bg {
+             background-color: #0a192f;
+             background-image: linear-gradient(rgba(100, 255, 218, 0.05) 1px, transparent 1px), linear-gradient(to right, rgba(100, 255, 218, 0.05) 1px, #0a192f 1px);
+             background-size: 2.5rem 2.5rem;
+        }
+        .text-green {
+            color: #64ffda; /* Professional Green */
+        }
+        .border-green {
+            border-color: #64ffda;
         }
         .card-glow {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #112240; /* Lighter Navy */
         }
         .card-glow:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(0, 255, 65, 0.4);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
         }
         .reveal {
             opacity: 0;
@@ -42,61 +48,58 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #000;
+            background: #0a192f;
         }
         ::-webkit-scrollbar-thumb {
-            background: #00FF41;
+            background: #8892b0; /* Slate */
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #00b32d;
+            background: #a8b2d1; /* Light Slate */
         }
     </style>
 </head>
-<body class="text-lg">
-    <canvas id="matrix-canvas"></canvas>
-
+<body class="text-lg body-bg">
     <!-- Header -->
-    <header class="bg-black/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 border-b border-green-500/30">
+    <header class="bg-[#0a192f]/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-lg shadow-black/20">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold">
-                    <a href="#">Zakriya Zahid_</a>
+                <div class="text-2xl font-bold font-mono text-green">
+                    <a href="#">ZZ_</a>
                 </div>
                 <div class="flex items-center space-x-4 md:space-x-8">
-                    <nav class="hidden md:flex items-center space-x-8">
-                        <a href="#about" class="hover:text-white transition-colors">// About</a>
-                        <a href="#experience" class="hover:text-white transition-colors">// Experience</a>
-                        <a href="#projects" class="hover:text-white transition-colors">// Projects</a>
-                        <a href="#skills" class="hover:text-white transition-colors">// Skills</a>
-                        <a href="#contact" class="hover:text-white transition-colors">// Contact</a>
+                    <nav class="hidden md:flex items-center space-x-8 font-mono text-sm">
+                        <a href="#about" class="hover:text-green transition-colors"><span class="text-green">01.</span> About</a>
+                        <a href="#experience" class="hover:text-green transition-colors"><span class="text-green">02.</span> Experience</a>
+                        <a href="#projects" class="hover:text-green transition-colors"><span class="text-green">03.</span> Projects</a>
+                        <a href="#contact" class="hover:text-green transition-colors"><span class="text-green">04.</span> Contact</a>
                     </nav>
-                    <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                    <button id="mobile-menu-button" class="md:hidden focus:outline-none text-green">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                     </button>
                 </div>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur-sm">
-            <a href="#about" class="block py-2 px-4 text-sm hover:bg-green-500/10">// About</a>
-            <a href="#experience" class="block py-2 px-4 text-sm hover:bg-green-500/10">// Experience</a>
-            <a href="#projects" class="block py-2 px-4 text-sm hover:bg-green-500/10">// Projects</a>
-            <a href="#skills" class="block py-2 px-4 text-sm hover:bg-green-500/10">// Skills</a>
-            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-green-500/10">// Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a192f]/90 backdrop-blur-sm font-mono text-sm">
+            <a href="#about" class="block py-3 px-4 text-center hover:bg-green/10">01. About</a>
+            <a href="#experience" class="block py-3 px-4 text-center hover:bg-green/10">02. Experience</a>
+            <a href="#projects" class="block py-3 px-4 text-center hover:bg-green/10">03. Projects</a>
+            <a href="#contact" class="block py-3 px-4 text-center hover:bg-green/10">04. Contact</a>
         </div>
     </header>
 
     <main class="relative z-10">
         <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center pt-20 pb-10">
-            <div class="container mx-auto px-6 text-center">
+            <div class="container mx-auto px-6">
                 <div class="max-w-4xl mx-auto">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight text-white">Ambitious Economics Graduate & Data Analyst</h1>
-                    <p class="text-xl md:text-2xl mb-8">> Transforming complex data into actionable insights and driving efficiency through innovative analytical solutions.</p>
-                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                        <a href="#projects" class="w-full sm:w-auto bg-green-500/20 border border-green-500 text-green-400 px-8 py-3 font-semibold hover:bg-green-500 hover:text-black transition-all hover:scale-105">[ View My Work ]</a>
-                        <a href="Muhammad Zakriya Zahid CV 1.pdf" download class="w-full sm:w-auto bg-green-500/20 border border-green-500 text-green-400 px-8 py-3 font-semibold hover:bg-green-500 hover:text-black transition-all hover:scale-105">[ Download CV ]</a>
+                    <p class="text-green font-mono mb-4">Hi, my name is</p>
+                    <h1 class="text-4xl md:text-7xl font-bold mb-3 text-[#ccd6f6]">Zakriya Zahid.</h1>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 text-[#8892b0]">I turn data into decisions.</h2>
+                    <p class="max-w-xl text-lg text-[#8892b0] mb-12">I'm an Economics graduate specializing in data analysis, with a passion for building solutions that drive efficiency. Currently seeking opportunities to apply my analytical skills to solve real-world problems.</p>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                        <a href="Muhammad Zakriya Zahid CV 1.pdf" download class="font-mono text-green border border-green px-8 py-3 rounded-md hover:bg-green/10 transition-all">Download CV</a>
                     </div>
                 </div>
             </div>
@@ -105,21 +108,28 @@
         <!-- About Section -->
         <section id="about" class="py-20 md:py-28 reveal">
             <div class="container mx-auto px-6">
-                 <h2 class="text-3xl font-bold mb-12 text-center text-white">>> INIT_ABOUT_ME.EXE</h2>
+                 <h2 class="text-2xl font-bold mb-12 flex items-center font-mono text-[#ccd6f6]"><span class="text-green mr-4 text-xl">01.</span>About Me <span class="block w-40 h-px bg-[#233554] ml-6"></span></h2>
                 <div class="grid md:grid-cols-5 gap-12 items-center">
-                    <div class="md:col-span-2">
-                        <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
-                            <div class="absolute inset-0 bg-green-500 rounded-full blur-2xl animate-pulse opacity-50"></div>
-                            <img src="https://placehold.co/400x400/00FF41/000000?text=ZZ" alt="Zakriya Zahid" class="relative rounded-full shadow-lg w-full h-full object-cover border-4 border-green-500/50">
-                        </div>
-                    </div>
-                    <div class="md:col-span-3 bg-black/50 p-6 border border-green-500/30 rounded-lg">
+                    <div class="md:col-span-3 text-[#8892b0]">
                         <p class="mb-4 leading-relaxed">
-                            I am a globally minded Economics graduate from the University of Greenwich with international work experience in Riyadh. My background has equipped me with strong analytical, communication, and leadership skills. I thrive in fast-paced environments, where I enjoy working with diverse stakeholders to deliver solutions that enhance efficiency and support decision-making.
+                            Hello! I'm Zakriya, a globally minded Economics graduate from the University of Greenwich with international work experience in Riyadh. My background has equipped me with strong analytical, communication, and leadership skills. I thrive in fast-paced environments, where I enjoy working with diverse stakeholders to deliver solutions that enhance efficiency and support decision-making.
                         </p>
-                        <p class="leading-relaxed">
+                        <p class="leading-relaxed mb-4">
                             Adaptable and curious, I am eager to build a career in global management, focusing on international rotations, cross-cultural collaboration, and continuous learning to make a meaningful impact.
                         </p>
+                        <p>Here are a few technologies I've been working with recently:</p>
+                        <ul class="grid grid-cols-2 gap-2 mt-4 text-sm font-mono list-inside">
+                            <li class="before:content-['▹'] before:mr-2 before:text-green">Python</li>
+                            <li class="before:content-['▹'] before:mr-2 before:text-green">Power BI</li>
+                            <li class="before:content-['▹'] before:mr-2 before:text-green">Advanced Excel</li>
+                            <li class="before:content-['▹'] before:mr-2 before:text-green">SQL (learning)</li>
+                        </ul>
+                    </div>
+                    <div class="md:col-span-2">
+                         <div class="relative w-64 h-64 md:w-80 md:h-80 mx-auto group">
+                            <div class="absolute inset-0 bg-green rounded-lg transition-all duration-300 group-hover:translate-x-3 group-hover:translate-y-3"></div>
+                            <img src="https://placehold.co/400x400/0a192f/64ffda?text=ZZ" alt="Zakriya Zahid" class="relative rounded-lg w-full h-full object-cover border-2 border-green transition-all duration-300 group-hover:-translate-x-3 group-hover:-translate-y-3">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,93 +138,56 @@
         <!-- Experience Section -->
         <section id="experience" class="py-20 md:py-28 reveal">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 text-white">>> LOAD_EXPERIENCE.LOG</h2>
-                <div class="max-w-3xl mx-auto relative">
-                    <div class="absolute left-4 top-4 bottom-4 w-0.5 bg-green-500/30"></div>
-                    <div class="relative pl-10 card-glow bg-black/50 backdrop-blur-sm p-8 rounded-lg shadow-md border border-green-500/30">
-                        <div class="absolute -left-1.5 top-9 w-4 h-4 bg-green-500 rounded-full border-4 border-black"></div>
-                        <div class="flex flex-col sm:flex-row justify-between items-start mb-2">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Data Management & Process Improvement Intern</h3>
-                                <p class="text-green-400 font-medium">Golden Glass Protection</p>
-                            </div>
-                            <div class="text-left sm:text-right mt-2 sm:mt-0">
-                                <p class="font-medium text-sm text-green-400/70">Jun 2023 - Sep 2023</p>
-                                <p class="text-sm text-green-400/70">Riyadh, Saudi Arabia</p>
-                            </div>
+                 <h2 class="text-2xl font-bold mb-12 flex items-center font-mono text-[#ccd6f6]"><span class="text-green mr-4 text-xl">02.</span>Where I've Worked <span class="block w-40 h-px bg-[#233554] ml-6"></span></h2>
+                <div class="max-w-3xl mx-auto relative card-glow p-8 rounded-lg shadow-md border border-green/20">
+                    <div class="flex flex-col sm:flex-row justify-between items-start mb-2">
+                        <div>
+                            <h3 class="text-xl font-bold text-[#ccd6f6]">Data Management & Process Improvement Intern</h3>
+                            <p class="text-green font-medium font-mono">@ Golden Glass Protection</p>
                         </div>
-                        <ul class="mt-4 list-disc list-inside space-y-2">
-                            <li>Adapted quickly to an international working environment.</li>
-                            <li>Designed interactive dashboards, improving efficiency by 27.7%.</li>
-                            <li>Delivered training workshops, demonstrating leadership.</li>
-                            <li>Supported strategy development through performance reporting.</li>
-                        </ul>
+                        <div class="text-left sm:text-right mt-2 sm:mt-0">
+                            <p class="font-mono text-sm text-[#8892b0]">Jun 2023 - Sep 2023</p>
+                            <p class="text-sm text-[#8892b0]">Riyadh, Saudi Arabia</p>
+                        </div>
                     </div>
+                    <ul class="mt-4 text-[#8892b0] space-y-2">
+                        <li class="relative pl-5 before:content-['▹'] before:absolute before:left-0 before:text-green">Adapted quickly to an international working environment, collaborating with senior leadership.</li>
+                        <li class="relative pl-5 before:content-['▹'] before:absolute before:left-0 before:text-green">Designed interactive dashboards, improving efficiency by 27.7% and building strong client relationships.</li>
+                        <li class="relative pl-5 before:content-['▹'] before:absolute before:left-0 before:text-green">Delivered training workshops, demonstrating leadership, communication and coaching ability.</li>
+                        <li class="relative pl-5 before:content-['▹'] before:absolute before:left-0 before:text-green">Supported strategy development through performance reporting, showcasing commercial awareness.</li>
+                    </ul>
                 </div>
             </div>
         </section>
-
 
         <!-- Projects Section -->
         <section id="projects" class="py-20 md:py-28 reveal">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12 text-white">>> RUN_PROJECTS.BAT</h2>
+                <h2 class="text-2xl font-bold mb-12 flex items-center font-mono text-[#ccd6f6]"><span class="text-green mr-4 text-xl">03.</span>Things I've Built <span class="block w-40 h-px bg-[#233554] ml-6"></span></h2>
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                     <!-- Project 1 -->
-                    <div class="card-glow bg-black/50 backdrop-blur-sm rounded-lg border border-green-500/30 p-6">
-                        <h3 class="text-xl font-bold mb-2 text-white">Dissertation: Impact of Corruption on Economic Growth</h3>
-                        <p class="mb-4 text-base">A cross-country analysis applying statistical modelling with Excel and Python to investigate the effects of corruption on economic growth.</p>
-                        <div class="flex space-x-4">
-                            <a href="YOUR_DISSERTATION_LINK_HERE" target="_blank" class="font-semibold hover:text-white underline">[ View Analysis ]</a>
-                            <a href="YOUR_SOURCE_CODE_LINK_HERE" target="_blank" class="font-semibold hover:text-white underline">[ Source Code ]</a>
+                    <div class="card-glow rounded-lg border border-green/20 p-6 flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-[#ccd6f6]">Dissertation: Impact of Corruption on Economic Growth</h3>
+                        <p class="text-[#8892b0] mb-4 text-base flex-grow">A cross-country analysis applying statistical modelling with Excel and Python to investigate the effects of corruption on economic growth.</p>
+                        <div class="flex space-x-4 font-mono text-sm text-[#8892b0] mt-4">
+                           <span>Excel</span><span>Python</span><span>Statistics</span>
+                        </div>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="YOUR_DISSERTATION_LINK_HERE" target="_blank" class="font-semibold text-green hover:underline text-sm">[ View Analysis ]</a>
+                            <a href="YOUR_SOURCE_CODE_LINK_HERE" target="_blank" class="font-semibold text-green hover:underline text-sm">[ Source Code ]</a>
                         </div>
                     </div>
                     <!-- Project 2 -->
-                    <div class="card-glow bg-black/50 backdrop-blur-sm rounded-lg border border-green-500/30 p-6">
-                        <h3 class="text-xl font-bold mb-2 text-white">Route Performance Visualization</h3>
-                        <p class="mb-4 text-base">Built and presented dashboards to decision-makers, turning complex analysis into clear, actionable recommendations for stakeholders.</p>
-                         <div class="flex space-x-4">
-                            <a href="YOUR_DASHBOARD_LINK_HERE" target="_blank" class="font-semibold hover:text-white underline">[ View Dashboard ]</a>
+                    <div class="card-glow rounded-lg border border-green/20 p-6 flex flex-col">
+                        <h3 class="text-xl font-bold mb-2 text-[#ccd6f6]">Route Performance Visualization</h3>
+                        <p class="text-[#8892b0] mb-4 text-base flex-grow">Built and presented dashboards to decision-makers, turning complex analysis into clear, actionable recommendations for stakeholders.</p>
+                         <div class="flex space-x-4 font-mono text-sm text-[#8892b0] mt-4">
+                           <span>Power BI</span><span>Data Viz</span><span>Reporting</span>
+                        </div>
+                         <div class="flex space-x-4 mt-4">
+                            <a href="YOUR_DASHBOARD_LINK_HERE" target="_blank" class="font-semibold text-green hover:underline text-sm">[ View Dashboard ]</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-20 md:py-28 reveal">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold mb-12 text-white">>> COMPILE_SKILLS.SH</h2>
-                <div class="max-w-5xl mx-auto">
-                    <div class="grid md:grid-cols-2 gap-10">
-                        <div>
-                            <h3 class="text-2xl font-semibold mb-6 text-white">// Technical_Skills</h3>
-                            <div class="flex flex-wrap justify-center gap-3">
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Advanced Excel</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Python</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Power BI</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Data Analysis</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Data Visualization</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Statistical Modelling</span>
-                            </div>
-                        </div>
-                        <div>
-                             <h3 class="text-2xl font-semibold mb-6 text-white">// Professional_Skills</h3>
-                             <div class="flex flex-wrap justify-center gap-3">
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Stakeholder Engagement</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Project Management</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Cross-cultural Comm</span>
-                                <span class="bg-green-500/20 text-sm px-4 py-2 rounded-full font-medium">Leadership & Mentoring</span>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="mt-12">
-                         <h3 class="text-2xl font-semibold mb-6 text-white">// Certifications</h3>
-                         <div class="flex flex-wrap justify-center gap-3">
-                            <span class="border border-green-400 text-green-400 text-sm px-4 py-2 rounded-full font-medium">Excel & ChatGPT: Data Analysis</span>
-                            <span class="border border-green-400 text-green-400 text-sm px-4 py-2 rounded-full font-medium">Microsoft Power BI (In Progress)</span>
-                        </div>
-                     </div>
                 </div>
             </div>
         </section>
@@ -222,80 +195,30 @@
         <!-- Contact Section -->
         <section id="contact" class="py-20 md:py-28 reveal">
             <div class="container mx-auto px-6 text-center">
-                 <h2 class="text-3xl font-bold mb-4 text-white">>> ESTABLISH_CONTACT</h2>
-                 <p class="mb-8 max-w-2xl mx-auto">I'm currently seeking new opportunities and would love to connect. Whether you have a question or just want to say hi, my inbox is always open.</p>
-                 <a href="mailto:zakriya.zahid.me@gmail.com" class="inline-block border-2 border-green-400 text-green-400 px-8 py-3 font-semibold hover:bg-green-500 hover:text-black transition-all text-xl hover:scale-105">[ Say Hello ]</a>
+                 <h2 class="text-2xl font-bold mb-4 font-mono text-green">04. What's Next?</h2>
+                 <h3 class="text-5xl font-bold text-[#ccd6f6] mb-4">Get In Touch</h3>
+                 <p class="mb-8 max-w-xl mx-auto text-[#8892b0]">I'm currently seeking new opportunities and would love to connect. Whether you have a question or just want to say hi, my inbox is always open.</p>
+                 <a href="mailto:zakriya.zahid.me@gmail.com" class="inline-block border border-green text-green px-8 py-4 font-mono rounded-md hover:bg-green/10 transition-all text-lg">[ Say Hello ]</a>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-green-500/30 py-8">
-        <div class="container mx-auto px-6 text-center text-green-400/70">
+    <footer class="py-8">
+        <div class="container mx-auto px-6 text-center text-[#8892b0]">
             <div class="flex justify-center space-x-6 mb-4">
-                <a href="YOUR_LINKEDIN_URL_HERE" target="_blank" class="hover:text-white">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                <a href="https://www.linkedin.com/in/muhammad-zakriya-zahid/" target="_blank" class="hover:text-green">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" role="img" aria-label="LinkedIn"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 </a>
-                <a href="YOUR_GITHUB_URL_HERE" target="_blank" class="hover:text-white">
-                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <a href="YOUR_GITHUB_URL_HERE" target="_blank" class="hover:text-green">
+                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" role="img" aria-label="GitHub"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                 </a>
             </div>
-            <p>&copy; 2025 Zakriya Zahid. All Rights Reserved.</p>
+            <p class="font-mono text-xs">&copy; 2025 Zakriya Zahid. All Rights Reserved.</p>
         </div>
     </footer>
     
     <script>
-        // --- MATRIX RAIN SCRIPT ---
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        const nums = '0123456789';
-        const alphabet = katakana + latin + nums;
-
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const rainDrops = [];
-
-        for (let x = 0; x < columns; x++) {
-            rainDrops[x] = 1;
-        }
-
-        const draw = () => {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00FF41';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < rainDrops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-                ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
-
-                if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    rainDrops[i] = 0;
-                }
-                rainDrops[i]++;
-            }
-        };
-
-        setInterval(draw, 30);
-        
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            // Recalculate columns and reset drops on resize
-            const newColumns = canvas.width / fontSize;
-            rainDrops.length = 0;
-            for (let x = 0; x < newColumns; x++) {
-                rainDrops[x] = 1;
-            }
-        });
-
         // --- MOBILE MENU SCRIPT ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -332,4 +255,3 @@
     </script>
 </body>
 </html>
-
