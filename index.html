@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zakriya Zahid — Data Analyst</title>
+  <title>Zakriya Zahid | Data Analyst</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -27,10 +27,27 @@
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden;cursor:none;transition:var(--transition-theme);}
     .theme-flash{position:fixed;inset:0;z-index:10000;pointer-events:none;background:radial-gradient(circle at var(--fx,50%) var(--fy,50%),rgba(255,220,80,0.14) 0%,transparent 70%);opacity:0;transition:opacity 0.5s ease;}
     .theme-flash.burst{opacity:1;}
-    .cursor{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
-    .cursor-ring{width:34px;height:34px;border:1.5px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s;opacity:.6;}
-    body.hovering .cursor{width:6px;height:6px;background:var(--accent2);}
-    body.hovering .cursor-ring{width:48px;height:48px;border-color:var(--accent2);opacity:.9;}
+    
+    /* F1 THEMED CURSOR */
+    .cursor{width:32px;height:32px;background:none;display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;font-size:24px;transition:transform 0.1s ease-out;}
+    .cursor::after{content:'🏎️';display:block;transform:rotate(-45deg);}
+    .cursor-ring{width:50px;height:50px;border:2px dashed var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:0.3;transform:translate(-50%, -50%);transition:width .3s,height .3s,border-color .3s;animation:rotateTrack 10s linear infinite;}
+    @keyframes rotateTrack { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+    body.hovering .cursor::after{content:'🏁';transform:rotate(0deg) scale(1.2);}
+    body.hovering .cursor-ring{border-style:solid;border-color:var(--accent3);opacity:0.8;width:60px;height:60px;}
+
+    /* HELMET LOADER CSS */
+    #helmet-loader { position: fixed; inset: 0; background: #07091C; z-index: 10005; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease-in-out; }
+    .helmet-wrapper { position: relative; width: 300px; height: 300px; display: flex; flex-direction: column; align-items: center; }
+    .helmet-base { position: absolute; width: 100%; height: 100%; background: #131A42; border: 4px solid #1e293b; border-radius: 50% 50% 30% 30%; box-shadow: 0 0 50px rgba(56, 189, 248, 0.1); }
+    .visor { position: absolute; top: 25%; width: 90%; height: 35%; background: #000; border-radius: 10px 10px 40px 40px; border: 2px solid #334155; z-index: 2; overflow: hidden; transform-origin: top; transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease; }
+    .visor-reflection { width: 200%; height: 100%; background: linear-gradient(110deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%); animation: reflect 3s infinite; }
+    #helmet-loader.open .visor { transform: translateY(-80%) scaleY(0.1); opacity: 0; }
+    #helmet-loader.fade-out { opacity: 0; pointer-events: none; }
+    .loader-text { position: absolute; bottom: -40px; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 3px; animation: pulse 1.5s infinite; }
+    @keyframes reflect { 0% { transform: translateX(-100%); } 100% { transform: translateX(50%); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
     ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
 
     /* LAMP */
@@ -215,6 +232,16 @@
   </style>
 </head>
 <body>
+  <div id="helmet-loader">
+    <div class="helmet-wrapper">
+      <div class="helmet-base"></div>
+      <div class="visor">
+        <div class="visor-reflection"></div>
+      </div>
+      <div class="loader-text">INITIATING SYSTEMS...</div>
+    </div>
+  </div>
+
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
   <div class="theme-flash" id="themeFlash"></div>
@@ -245,7 +272,7 @@
       <div class="hero-tag">Available for opportunities</div>
       <h1 class="hero-name">Zakriya<br /><em>Zahid</em></h1>
       <p class="hero-subtitle">Data Analyst &amp; Economics Graduate</p>
-      <p class="hero-desc">I transform complex datasets into clear, actionable decisions. Experienced in Python, Power BI, SQL, and statistical modelling — with international work experience in Riyadh.</p>
+      <p class="hero-desc">I transform complex datasets into clear, actionable decisions. Experienced in Python, Power BI, SQL, and statistical modelling, with international work experience in Riyadh.</p>
       <div class="hero-actions">
         <a href="#projects" class="btn-primary">View My Work</a>
         <a href="#contact" class="btn-secondary">Get in Touch</a>
@@ -268,9 +295,9 @@
     <h2 class="section-title reveal">The person<br /><em>behind the data</em></h2>
     <div class="about-grid">
       <div class="about-text reveal-l">
-        <p>I'm a <strong>data analyst and Economics graduate</strong> from the University of Greenwich, with hands-on international experience at Golden Glass Protection in Riyadh. I thrive at the intersection of analytical rigour and business impact — translating messy data into decisions that actually matter.</p>
+        <p>I'm a <strong>data analyst and Economics graduate</strong> from the University of Greenwich, with hands-on international experience at Golden Glass Protection in Riyadh. I thrive at the intersection of analytical rigour and business impact, translating messy data into decisions that actually matter.</p>
         <p>My work spans building <strong>real-time Power BI dashboards</strong>, automating reporting pipelines with Python, and conducting advanced statistical modelling with STATA and Excel. I'm fluent in both English and Arabic, which has helped me build strong cross-cultural client relationships.</p>
-        </p>I believe the best analysts are curious about everything.</p>
+        <p>I believe the best analysts are curious about everything.</p>
         <div class="about-skills">
           <div class="skills-heading">Technical Stack</div>
           <div class="skill-group"><div class="skill-group-label">// Data &amp; Analytics</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">STATA</span><span class="skill-tag">Advanced Excel</span><span class="skill-tag">Power Query</span></div></div>
@@ -331,7 +358,7 @@
     <div class="sou-card reveal">
       <div>
         <div class="project-num" style="margin-bottom:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;"><span>Project 03</span></div>
-        <div class="project-title" style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:10px;">Southeastern Railway — Route Performance Visualisation</div>
+        <div class="project-title" style="font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:10px;">Southeastern Railway | Route Performance Visualisation</div>
         <div class="project-desc" style="font-size:13.5px;color:var(--muted);margin-bottom:20px;line-height:1.7;">Analysed operational datasets across Southeastern train lines to identify service inefficiencies and skilling gaps. Built interactive Excel and Power BI models with pivot modelling to surface actionable KPIs and present to assessment panels. Delivered data-backed recommendations to improve customer SLAs across key routes.</div>
         <div class="project-stack"><span class="stack-tag">Power BI</span><span class="stack-tag">Excel</span><span class="stack-tag">Pivot Modelling</span><span class="stack-tag">KPI Analysis</span></div>
       </div>
@@ -406,11 +433,33 @@
   </footer>
 
   <script>
+  /* F1 HELMET LOADER SCRIPT */
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('helmet-loader');
+    const radioCheck = new Audio('https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptoken=YTVmZDMwZjItM2E2MC00NmU1LTk1ODktYmUyMDkyZGI4MTli'); // Hosted Alonso "Radio Check"
+    
+    setTimeout(() => {
+      loader.classList.add('open');
+      radioCheck.play().catch(e => console.log("Audio requires user interaction first"));
+      
+      setTimeout(() => {
+        loader.classList.add('fade-out');
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      }, 1000);
+    }, 1500);
+  });
+
   /* CURSOR */
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
   let mx=-100,my=-100,rx=-100,ry=-100;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  (function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;cursor.style.left=mx+'px';cursor.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  (function loop(){
+    rx+=(mx-rx)*.15;ry+=(my-ry)*.15;
+    cursor.style.transform = `translate(-50%, -50%)`;
+    cursor.style.left=mx+'px';cursor.style.top=my+'px';
+    ring.style.left=rx+'px';ring.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  })();
   document.querySelectorAll('a,button,.project-card,.hero-stat,.about-card,.f1-stat-card,.skill-tag').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));});
 
   /* NAV SCROLL */
