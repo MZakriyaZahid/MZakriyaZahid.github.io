@@ -27,55 +27,10 @@
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden;cursor:none;transition:var(--transition-theme);}
     .theme-flash{position:fixed;inset:0;z-index:10000;pointer-events:none;background:radial-gradient(circle at var(--fx,50%) var(--fy,50%),rgba(255,220,80,0.14) 0%,transparent 70%);opacity:0;transition:opacity 0.5s ease;}
     .theme-flash.burst{opacity:1;}
-    
-    /* F1 THEMED CURSOR */
-    .cursor{width:32px;height:32px;background:none;display:flex;align-items:center;justify-content:center;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;font-size:24px;transition:transform 0.1s ease-out;}
-    .cursor::after{content:'🏎️';display:block;transform:rotate(-45deg);}
-    .cursor-ring{width:50px;height:50px;border:2px dashed var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:0.3;transform:translate(-50%, -50%);transition:width .3s,height .3s,border-color .3s;animation:rotateTrack 10s linear infinite;}
-    @keyframes rotateTrack { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-    body.hovering .cursor::after{content:'🏁';transform:rotate(0deg) scale(1.2);}
-    body.hovering .cursor-ring{border-style:solid;border-color:var(--accent3);opacity:0.8;width:60px;height:60px;}
-
-    /* REALISTIC HELMET LOADER CSS */
-    #helmet-loader { position: fixed; inset: 0; background: #07091C; z-index: 10005; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease-in-out; }
-    .helmet-wrapper { position: relative; width: 300px; height: 300px; display: flex; flex-direction: column; align-items: center; }
-    
-    /* Using a base realistic helmet image and animating a clip-path for a realistic perspective visor opening effect */
-    .helmet-base { 
-      position: absolute; 
-      width: 100%; 
-      height: 100%; 
-      /* REPLACE THIS PLACEHOLDER URL WITH YOUR REAL HELMET JPG/PNG */
-      background-image: url('https://www.shutterstock.com/image-photo/helmet-formula-one-red-front-260nw-2659681713.jpg'); 
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 1;
-    }
-    .visor-mask { 
-      position: absolute; 
-      top: 25%; /* Start position of the closed visor in the image */
-      width: 90%; 
-      height: 35%; /* Total height of the closed visor in the image */
-      background: #000; /* Color for the dark opening beneath the visor */
-      border-radius: 10px 10px 40px 40px; 
-      z-index: 2; 
-      overflow: hidden; 
-      /* We will animate a clip-path to shrink it bottom-up */
-      transition: clip-path 1.4s cubic-bezier(0.85, 0, 0.15, 1);
-      /* Initial state: full visor covered by the mask */
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-    .visor-reflection { width: 200%; height: 100%; background: linear-gradient(110deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%); animation: reflect 3s infinite; }
-    
-    /* Animation trigger: Shrink the mask from the bottom up to simulate folding into top of helmet */
-    #helmet-loader.open .visor-mask { clip-path: polygon(0 0, 100% 0, 100% 10%, 0 10%); }
-    
-    #helmet-loader.fade-out { opacity: 0; pointer-events: none; }
-    .loader-text { position: absolute; bottom: -40px; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 3px; animation: pulse 1.5s infinite; }
-    @keyframes reflect { 0% { transform: translateX(-100%); } 100% { transform: translateX(50%); } }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
+    .cursor{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;}
+    .cursor-ring{width:34px;height:34px;border:1.5px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s;opacity:.6;}
+    body.hovering .cursor{width:6px;height:6px;background:var(--accent2);}
+    body.hovering .cursor-ring{width:48px;height:48px;border-color:var(--accent2);opacity:.9;}
     ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
 
     /* LAMP */
@@ -260,16 +215,6 @@
   </style>
 </head>
 <body>
-  <div id="helmet-loader">
-    <div class="helmet-wrapper">
-      <div class="helmet-base"></div>
-      <div class="visor-mask">
-        <div class="visor-reflection"></div>
-      </div>
-      <div class="loader-text font-mono">Radio Check, Radio Check</div>
-    </div>
-  </div>
-
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
   <div class="theme-flash" id="themeFlash"></div>
@@ -461,36 +406,11 @@
   </footer>
 
   <script>
-  /* REALISTIC F1 HELMET LOADER SCRIPT */
-  window.addEventListener('load', () => {
-    const loader = document.getElementById('helmet-loader');
-    const radioCheck = new Audio('https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptoken=YTVmZDMwZjItM2E2MC00NmU1LTk1ODktYmUyMDkyZGI4MTli'); // Hosted Alonso "Radio Check"
-    
-    setTimeout(() => {
-      // Visor begins perspective-shaping animation
-      loader.classList.add('open');
-      // "Radio Check" sound plays to greet the user
-      radioCheck.play().catch(e => console.log("Audio requires user interaction first"));
-      
-      setTimeout(() => {
-        loader.classList.add('fade-out');
-        // Original content-reveal logic
-        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-      }, 1000);
-    }, 1500); // Duration user sees closed helmet
-  });
-
   /* CURSOR */
   const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
   let mx=-100,my=-100,rx=-100,ry=-100;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-  (function loop(){
-    rx+=(mx-rx)*.15;ry+=(my-ry)*.15;
-    cursor.style.transform = `translate(-50%, -50%)`;
-    cursor.style.left=mx+'px';cursor.style.top=my+'px';
-    ring.style.left=rx+'px';ring.style.top=ry+'px';
-    requestAnimationFrame(loop);
-  })();
+  (function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;cursor.style.left=mx+'px';cursor.style.top=my+'px';ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
   document.querySelectorAll('a,button,.project-card,.hero-stat,.about-card,.f1-stat-card,.skill-tag').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));});
 
   /* NAV SCROLL */
