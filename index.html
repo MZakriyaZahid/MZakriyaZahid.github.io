@@ -393,50 +393,7 @@
   </footer>
 
   <script>
-  /* ============================================================
-     INTRO ANIMATION SEQUENCE
-  ============================================================ */
-  (function() {
-    const overlay   = document.getElementById('intro-overlay');
-    const helmet    = document.getElementById('helmetWrap');
-    const visor     = document.getElementById('visorPanel');
-    const visorLight= document.getElementById('visorLight');
-    const glint     = document.getElementById('visorGlint');
-    const radioUI   = document.getElementById('radioUI');
-
-    // Step 1: after helmet scales in (0.9s), add rumble
-    setTimeout(() => {
-      helmet.classList.add('rumble');
-    }, 1150);
-
-    // Step 2: slide visor open + light burst
-    setTimeout(() => {
-      visor.classList.add('slide-open');
-      visorLight.classList.add('burst');
-    }, 1900);
-
-    // Step 3: glint sweep across open visor
-    setTimeout(() => {
-      glint.classList.add('sweep');
-    }, 2350);
-
-    // Step 4: show radio UI + typewriter
-    setTimeout(() => {
-      radioUI.classList.add('show');
-    }, 2600);
-
-    // Step 5: fade out entire overlay
-    setTimeout(() => {
-      overlay.classList.add('fade-out');
-      document.body.classList.remove('intro-active');
-    }, 5000);
-
-    // Step 6: remove from DOM entirely
-    setTimeout(() => {
-      overlay.remove();
-    }, 5950);
-  })();
-
+ 
   /* ============================================================
      CURSOR
   ============================================================ */
