@@ -12,15 +12,17 @@
     :root { --transition-theme: background 0.55s ease, color 0.55s ease, border-color 0.55s ease; }
     [data-theme="dark"] {
       --bg:#07091C; --bg2:#0D1130; --bg3:#131A42; --text:#E8EDF8; --muted:#7B85A8;
-      --accent:#38BDF8; --accent2:#A78BFA; --accent3:#34D399;
+      --accent:#f0c314; /* Renault Yellow */
+      --accent2:#66b2da; /* Renault Light Blue */
+      --accent3:#0d2b52; /* Renault Dark Blue */
       --border:rgba(255,255,255,0.07); --card-bg:rgba(19,26,66,0.7);
-      --lamp-body:#2A2A35; --lamp-cord:#555; --lamp-shade-color:#3A3A4A;
     }
     [data-theme="light"] {
       --bg:#F4F6FF; --bg2:#FFFFFF; --bg3:#EAEEff; --text:#1A1D3B; --muted:#5C6494;
-      --accent:#2563EB; --accent2:#7C3AED; --accent3:#059669;
+      --accent:#074e43; /* Aston Dark Green */
+      --accent2:#9eb749; /* Aston Lime */
+      --accent3:#a6bdbb; /* Aston Grey/Green */
       --border:rgba(0,0,0,0.08); --card-bg:rgba(255,255,255,0.85);
-      --lamp-body:#D4A84B; --lamp-cord:#8B7355; --lamp-shade-color:#C8922A;
     }
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -472,7 +474,15 @@
   const shapValues=[0.38,0.27,0.14,0.08,0.06,0.04,0.02,0.01];
   function gc(){
     const dark=html.getAttribute('data-theme')==='dark';
-    return{a:dark?'#38BDF8':'#2563EB',a2:dark?'#A78BFA':'#7C3AED',a3:dark?'#34D399':'#059669',m:dark?'#7B85A8':'#5C6494',t:dark?'#E8EDF8':'#1A1D3B',g:dark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)',tip:dark?'#0D1130':'#FFFFFF'};
+    return{
+      a:dark?'#f0c314':'#074e43',    // Accent 1
+      a2:dark?'#66b2da':'#9eb749',   // Accent 2
+      a3:dark?'#0d2b52':'#a6bdbb',   // Accent 3
+      m:dark?'#7B85A8':'#5C6494',    // Muted text/grids
+      t:dark?'#E8EDF8':'#1A1D3B',    // Main text
+      g:dark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)', // Gridlines
+      tip:dark?'#0D1130':'#FFFFFF'   // Tooltip backgrounds
+    };
   }
   function grid(c){return{color:c.g};}
   function tip(c){return{backgroundColor:c.tip,borderColor:c.g,borderWidth:1,titleColor:c.t,bodyColor:c.m};}
