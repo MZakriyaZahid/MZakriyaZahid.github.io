@@ -11,11 +11,14 @@
   <style>
     :root { --transition-theme: background 0.55s ease, color 0.55s ease, border-color 0.55s ease; }
     [data-theme="dark"] {
-      --bg:#07091C; --bg2:#0D1130; --bg3:#131A42; --text:#E8EDF8; --muted:#7B85A8;
+      --bg:#061528; /* Deepened Renault Blue for main background */
+      --bg2:#0d2b52; /* Renault Dark Blue for cards/sections */
+      --bg3:#143e75; /* Lighter blue for hovers */
+      --text:#E8EDF8; --muted:#8BA3C0;
       --accent:#f0c314; /* Renault Yellow */
       --accent2:#66b2da; /* Renault Light Blue */
-      --accent3:#0d2b52; /* Renault Dark Blue */
-      --border:rgba(255,255,255,0.07); --card-bg:rgba(19,26,66,0.7);
+      --accent3:#FFFFFF; /* Crisp White for readable badges and positive stats */
+      --border:rgba(255,255,255,0.1); --card-bg:rgba(13,43,82,0.7);
     }
     [data-theme="light"] {
       --bg:#F4F6FF; --bg2:#FFFFFF; --bg3:#EAEEff; --text:#1A1D3B; --muted:#5C6494;
@@ -475,13 +478,13 @@
   function gc(){
     const dark=html.getAttribute('data-theme')==='dark';
     return{
-      a:dark?'#f0c314':'#074e43',    // Accent 1
-      a2:dark?'#66b2da':'#9eb749',   // Accent 2
-      a3:dark?'#0d2b52':'#a6bdbb',   // Accent 3
-      m:dark?'#7B85A8':'#5C6494',    // Muted text/grids
+      a:dark?'#f0c314':'#074e43',    // Accent 1 (Yellow / Dark Green)
+      a2:dark?'#66b2da':'#9eb749',   // Accent 2 (Light Blue / Lime)
+      a3:dark?'#FFFFFF':'#a6bdbb',   // Accent 3 (White / Grey-Green)
+      m:dark?'#8BA3C0':'#5C6494',    // Muted text/grids
       t:dark?'#E8EDF8':'#1A1D3B',    // Main text
       g:dark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)', // Gridlines
-      tip:dark?'#0D1130':'#FFFFFF'   // Tooltip backgrounds
+      tip:dark?'#0d2b52':'#FFFFFF'   // Tooltip backgrounds (Using Renault Dark Blue here!)
     };
   }
   function grid(c){return{color:c.g};}
