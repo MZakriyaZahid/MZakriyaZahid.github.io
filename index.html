@@ -36,12 +36,10 @@
     body.hovering .cursor-ring{width:48px;height:48px;border-color:var(--accent2);opacity:.9;}
     ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
     
-    .f1-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;padding:0;width:120px;height:50px;overflow:hidden;}
-.f1-car{width:110px;height:auto;transition:transform 0.4s cubic-bezier(0.5,0,0.1,1),opacity 0.3s ease;}
-.f1-car.drive-off-left{transform:translateX(-150px);opacity:0;}
-.f1-car.drive-off-right{transform:translateX(150px);opacity:0;}
-.f1-car.prep-left{transform:translateX(-150px);opacity:0;transition:none;}
-.f1-car.prep-right{transform:translateX(150px);opacity:0;transition:none;}
+    .f1-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;padding:0;width:160px;height:60px;overflow:hidden;}
+.f1-car{width:150px;height:auto;transition:transform 0.4s cubic-bezier(0.5,0,0.1,1),opacity 0.3s ease;}
+.f1-car.drive-off{transform:translateX(-200px);opacity:0;}
+.f1-car.drive-in-prep{transform:translateX(200px);opacity:0;transition:none;}
     .f1-btn::after{content:attr(data-tooltip);position:absolute;top:115%;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;}
     .f1-btn:hover::after{opacity:1;}
     
@@ -410,25 +408,15 @@
   }
 
   toggleBtn.addEventListener('click', e => {
-    // Check which theme we are currently in BEFORE swapping
-    const isCurrentlyDark = html.getAttribute('data-theme') === 'dark';
-
-    // 1. Renault faces Left (Dark), Aston faces Right (Light)
-    if (isCurrentlyDark) {
-      f1CarImg.classList.add('drive-off-left'); // Renault drives forward
-    } else {
-      f1CarImg.classList.add('drive-off-right'); // Aston drives forward
-    }
+    f1CarImg.classList.add('drive-off');
 
     setTimeout(() => {
-      // Swap themes
       const isDark = html.getAttribute('data-theme') === 'dark';
       html.setAttribute('data-theme', isDark ? 'light' : 'dark');
       localStorage.setItem('zz-theme', isDark ? 'light' : 'dark');
       
       f1CarImg.src = isDark ? 'AMR26.png' : 'R25.png';
       
-      // Flash effect
       const rect = toggleBtn.getBoundingClientRect();
       flash.style.setProperty('--fx',(rect.left+rect.width/2)+'px');
       flash.style.setProperty('--fy',(rect.top+rect.height/2)+'px');
@@ -437,19 +425,11 @@
       
       setTimeout(updateChartColors, 300);
 
-      // 2. Clear old classes and prep the new car
-      f1CarImg.className = 'f1-car'; 
+      f1CarImg.classList.remove('drive-off');
+      f1CarImg.classList.add('drive-in-prep');
       
-      if (isCurrentlyDark) {
-        // Swapped to Aston (faces right). Start it on the left so it drives right.
-        f1CarImg.classList.add('prep-left');
-      } else {
-        // Swapped to Renault (faces left). Start it on the right so it drives left.
-        f1CarImg.classList.add('prep-right');
-      }
-      
-      void f1CarImg.offsetWidth; // Force the browser to reset
-      f1CarImg.classList.remove('prep-left', 'prep-right'); // Drive in!
+      void f1CarImg.offsetWidth; 
+      f1CarImg.classList.remove('drive-in-prep');
 
     }, 400); 
   });
