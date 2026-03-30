@@ -36,14 +36,16 @@
     body.hovering .cursor{width:6px;height:6px;background:var(--accent2);}
     body.hovering .cursor-ring{width:48px;height:48px;border-color:var(--accent2);opacity:.9;}
     ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
-    .lamp-btn{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;padding:0;position:relative;width:34px;gap:0;}
-    .lamp-cord{width:2px;height:16px;background:var(--lamp-cord);border-radius:1px;transition:background .4s;}
-    .lamp-shade{width:34px;height:20px;background:var(--lamp-shade-color);clip-path:polygon(10% 0%,90% 0%,100% 100%,0% 100%);border-radius:0 0 4px 4px;transition:background .4s,filter .4s;position:relative;}
-    [data-theme="light"] .lamp-shade{background:#C8922A;filter:drop-shadow(0 4px 12px rgba(255,180,50,.8));}
-    .lamp-bulb{width:10px;height:10px;border-radius:50%;background:rgba(255,220,80,0);margin-top:2px;transition:background .5s,box-shadow .5s;}
-    [data-theme="light"] .lamp-bulb{background:rgba(255,220,100,.9);box-shadow:0 0 12px 6px rgba(255,200,50,.5),0 0 30px 15px rgba(255,200,50,.18);}
-    .lamp-btn::after{content:attr(data-tooltip);position:absolute;top:115%;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;}
-    .lamp-btn:hover::after{opacity:1;}
+    .f1-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; position: relative; padding: 0; width: 60px; height: 34px; overflow: hidden; }
+.f1-car { width: 55px; height: auto; transition: transform 0.4s cubic-bezier(0.5, 0, 0.1, 1), opacity 0.3s ease; }
+
+/* The class we will add via JS to trigger the drive-off */
+.f1-car.drive-off { transform: translateX(80px); opacity: 0; }
+.f1-car.drive-in-prep { transform: translateX(-80px); opacity: 0; transition: none; }
+
+/* Re-attaching your tooltip styling to the new button */
+.f1-btn::after { content: attr(data-tooltip); position: absolute; top: 115%; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .06em; color: var(--muted); white-space: nowrap; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.f1-btn:hover::after { opacity: 1; }
     nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:20px 52px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s,border-color .4s;}
     nav.scrolled{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(22px);border-bottom:1px solid var(--border);}
     .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);text-decoration:none;letter-spacing:-.02em;}
@@ -219,11 +221,9 @@
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-right">
-      <button class="lamp-btn" id="themeToggle" data-tooltip="Toggle lights" aria-label="Toggle theme">
-        <div class="lamp-cord"></div>
-        <div class="lamp-shade"></div>
-        <div class="lamp-bulb"></div>
-      </button>
+     <button class="f1-btn" id="themeToggle" data-tooltip="Toggle Theme" aria-label="Toggle theme">
+  <img src="R25.jpg" alt="F1 Car Toggle" id="f1CarImg" class="f1-car">
+</button>
       <a href="Zakriya_Zahid_CV_GEN.pdf" download class="nav-cta">Download CV</a>
     </div>
   </nav>
@@ -409,23 +409,51 @@
   const nav=document.getElementById('nav');
   window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
 
-  /* LAMP THEME TOGGLE */
-  const toggleBtn=document.getElementById('themeToggle'),flash=document.getElementById('themeFlash'),html=document.documentElement;
+  /* F1 THEME TOGGLE */
+  const toggleBtn=document.getElementById('themeToggle'), flash=document.getElementById('themeFlash'), html=document.documentElement;
+  const f1CarImg=document.getElementById('f1CarImg');
   const saved=localStorage.getItem('zz-theme');
-  if(saved)html.setAttribute('data-theme',saved);
-  toggleBtn.addEventListener('click',e=>{
-    const rect=toggleBtn.getBoundingClientRect();
-    flash.style.setProperty('--fx',(rect.left+rect.width/2)+'px');
-    flash.style.setProperty('--fy',(rect.top+rect.height/2)+'px');
-    const isDark=html.getAttribute('data-theme')==='dark';
-    flash.classList.add('burst');
-    setTimeout(()=>flash.classList.remove('burst'),500);
-    html.setAttribute('data-theme',isDark?'light':'dark');
-    localStorage.setItem('zz-theme',isDark?'light':'dark');
-    toggleBtn.setAttribute('data-tooltip',isDark?'Lights on':'Lights off');
-    setTimeout(updateChartColors,300);
-  });
+  
+  // Initialize saved theme and correct car image
+  if(saved) {
+    html.setAttribute('data-theme',saved);
+    f1CarImg.src = saved === 'light' ? 'AMR26.jpg' : 'R25.jpg';
+  }
 
+  toggleBtn.addEventListener('click', e => {
+    // 1. Trigger the drive-off animation
+    f1CarImg.classList.add('drive-off');
+
+    // 2. Wait for the car to leave the screen (400ms to match CSS transition)
+    setTimeout(() => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      // Swap the theme
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      localStorage.setItem('zz-theme', isDark ? 'light' : 'dark');
+      
+      // Swap the car image
+      f1CarImg.src = isDark ? 'AMR26.jpg' : 'R25.jpg';
+      
+      // Setup the flash burst effect
+      const rect = toggleBtn.getBoundingClientRect();
+      flash.style.setProperty('--fx',(rect.left+rect.width/2)+'px');
+      flash.style.setProperty('--fy',(rect.top+rect.height/2)+'px');
+      flash.classList.add('burst');
+      setTimeout(()=>flash.classList.remove('burst'), 500);
+      
+      setTimeout(updateChartColors, 300);
+
+      // 3. Teleport the car to the left side invisibly, then drive it back in
+      f1CarImg.classList.remove('drive-off');
+      f1CarImg.classList.add('drive-in-prep');
+      
+      // Force the browser to register the position reset before removing the prep class
+      void f1CarImg.offsetWidth; 
+      f1CarImg.classList.remove('drive-in-prep');
+
+    }, 400); 
+  });
   /* REVEAL */
   const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.1});
   document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>ro.observe(el));
