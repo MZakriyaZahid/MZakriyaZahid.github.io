@@ -11,14 +11,11 @@
   <style>
     :root { --transition-theme: background 0.55s ease, color 0.55s ease, border-color 0.55s ease; }
     [data-theme="dark"] {
-      --bg:#061528; /* Deepened Renault Blue for main background */
-      --bg2:#0d2b52; /* Renault Dark Blue for cards/sections */
-      --bg3:#143e75; /* Lighter blue for hovers */
-      --text:#E8EDF8; --muted:#8BA3C0;
+      --bg:#07091C; --bg2:#0D1130; --bg3:#131A42; --text:#E8EDF8; --muted:#7B85A8;
       --accent:#f0c314; /* Renault Yellow */
       --accent2:#66b2da; /* Renault Light Blue */
-      --accent3:#FFFFFF; /* Crisp White for readable badges and positive stats */
-      --border:rgba(255,255,255,0.1); --card-bg:rgba(13,43,82,0.7);
+      --accent3:#0d2b52; /* Renault Dark Blue */
+      --border:rgba(255,255,255,0.07); --card-bg:rgba(19,26,66,0.7);
     }
     [data-theme="light"] {
       --bg:#F4F6FF; --bg2:#FFFFFF; --bg3:#EAEEff; --text:#1A1D3B; --muted:#5C6494;
@@ -157,7 +154,7 @@
     .f1-stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:18px 20px;transition:var(--transition-theme);}
     .f1-stat-card .label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
     .f1-stat-card .value{font-family:'Playfair Display',serif;font-weight:700;font-size:28px;letter-spacing:-.02em;color:var(--text);line-height:1;}
-    .f1-stat-card .value.pos{color:var(--accent3);}
+    .f1-stat-card .value.pos{color:var(--accent2);}
     .f1-stat-card .value.acc{color:var(--accent);}
     .f1-stat-card .delta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;}
     .f1-dashboard{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px;}
@@ -478,21 +475,21 @@
   function gc(){
     const dark=html.getAttribute('data-theme')==='dark';
     return{
-      a:dark?'#f0c314':'#074e43',    // Accent 1 (Yellow / Dark Green)
-      a2:dark?'#66b2da':'#9eb749',   // Accent 2 (Light Blue / Lime)
-      a3:dark?'#FFFFFF':'#a6bdbb',   // Accent 3 (White / Grey-Green)
-      m:dark?'#8BA3C0':'#5C6494',    // Muted text/grids
+      a:dark?'#f0c314':'#074e43',    // Accent 1
+      a2:dark?'#66b2da':'#9eb749',   // Accent 2
+      a3:dark?'#0d2b52':'#a6bdbb',   // Accent 3
+      m:dark?'#7B85A8':'#5C6494',    // Muted text/grids
       t:dark?'#E8EDF8':'#1A1D3B',    // Main text
       g:dark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)', // Gridlines
-      tip:dark?'#0d2b52':'#FFFFFF'   // Tooltip backgrounds (Using Renault Dark Blue here!)
+      tip:dark?'#0D1130':'#FFFFFF'   // Tooltip backgrounds
     };
   }
   function grid(c){return{color:c.g};}
   function tip(c){return{backgroundColor:c.tip,borderColor:c.g,borderWidth:1,titleColor:c.t,bodyColor:c.m};}
   let mC,rC,qC,sC;
-  function buildTraj(){const c=gc(),ctx=document.getElementById('trajectoryChart').getContext('2d');return new Chart(ctx,{type:'line',data:{labels:seasons,datasets:[{label:'Actual Avg Finish',data:avgFinish,borderColor:c.a3,fill:false,borderWidth:2.5,pointRadius:4,pointBackgroundColor:c.a3,tension:.35},{label:'Model Prediction',data:avgPred,borderColor:c.a,fill:false,borderWidth:2,borderDash:[6,4],pointRadius:3,pointBackgroundColor:c.a,tension:.35}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{reverse:true,min:1,max:20,grid:grid(c),ticks:{color:c.m,callback:v=>'P'+v},title:{display:true,text:'Finishing Position',color:c.m}},x:{grid:grid(c),ticks:{color:c.m}}},plugins:{legend:{labels:{color:c.t,boxWidth:20,padding:14}},tooltip:tip(c)}}});}
-  function buildElo(){const c=gc(),ctx=document.getElementById('trajectoryChart').getContext('2d');return new Chart(ctx,{type:'line',data:{labels:seasons,datasets:[{label:'Alonso',data:eloAlo,borderColor:c.a3,borderWidth:3,fill:false,tension:.35,pointRadius:3,pointBackgroundColor:c.a3},{label:'Hamilton',data:eloHam,borderColor:c.a,borderWidth:1.5,fill:false,borderDash:[5,4],tension:.35,pointRadius:2},{label:'Verstappen',data:eloVer,borderColor:'#F59E0B',borderWidth:1.5,fill:false,borderDash:[5,4],tension:.35,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:1500,grid:grid(c),ticks:{color:c.m},title:{display:true,text:'ELO Rating',color:c.m}},x:{grid:grid(c),ticks:{color:c.m}}},plugins:{legend:{labels:{color:c.t,boxWidth:20,padding:14}},tooltip:tip(c)}}});}
-  function buildPts(){const c=gc(),ctx=document.getElementById('trajectoryChart').getContext('2d');return new Chart(ctx,{type:'bar',data:{labels:seasons,datasets:[{label:'Points Added',data:pointsAdded,backgroundColor:pointsAdded.map(v=>v>=0?c.a3+'CC':c.a+'CC'),borderColor:pointsAdded.map(v=>v>=0?c.a3:c.a),borderWidth:1.5,borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{grid:grid(c),ticks:{color:c.m},title:{display:true,text:'Points Above Expectation',color:c.m}},x:{grid:grid(c),ticks:{color:c.m}}},plugins:{legend:{display:false},tooltip:tip(c)}}});}
+  function buildTraj(){const c=gc(),ctx=document.getElementById('trajectoryChart').getContext('2d');return new Chart(ctx,{type:'line',data:{labels:seasons,datasets:[{label:'Actual Avg Finish',data:avgFinish,borderColor:c.a2,fill:false,borderWidth:2.5,pointRadius:4,pointBackgroundColor:c.a2,tension:.35},{label:'Model Prediction',data:avgPred,borderColor:c.a,fill:false,borderWidth:2,borderDash:[6,4],pointRadius:3,pointBackgroundColor:c.a,tension:.35}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{reverse:true,min:1,max:20,grid:grid(c),ticks:{color:c.m,callback:v=>'P'+v},title:{display:true,text:'Finishing Position',color:c.m}},x:{grid:grid(c),ticks:{color:c.m}}},plugins:{legend:{labels:{color:c.t,boxWidth:20,padding:14}},tooltip:tip(c)}}});}
+  function buildElo(){const c=gc(),ctx=document.getElementById('trajectoryChart').getContext('2d');return new Chart(ctx,{type:'line',data:{labels:seasons,datasets:[{label:'Alonso',data:eloAlo,borderColor:c.a2,borderWidth:3,fill:false,tension:.35,pointRadius:3,pointBackgroundColor:c.a2},{label:'Hamilton',data:eloHam,borderColor:c.a,borderWidth:1.5,fill:false,borderDash:[5,4],tension:.35,pointRadius:2},{label:'Verstappen',data:eloVer,borderColor:'#F59E0B',borderWidth:1.5,fill:false,borderDash:[5,4],tension:.35,pointRadius:2}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:1500,grid:grid(c),ticks:{color:c.m},title:{display:true,text:'ELO Rating',color:c.m}},x:{grid:grid(c),ticks:{color:c.m}}},plugins:{legend:{labels:{color:c.t,boxWidth:20,padding:14}},tooltip:tip(c)}}});}
+  function buildPts(){const c=gc(),ctx=document.getElementById('trajectoryChart').getContext('2d');return new Chart(ctx,{type:'bar',data:{labels:seasons,datasets:[{label:'Points Added',data:pointsAdded,backgroundColor:pointsAdded.map(v=>v>=0?c.a2+'CC':c.a+'CC'),borderColor:pointsAdded.map(v=>v>=0?c.a2:c.a),borderWidth:1.5,borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{grid:grid(c),ticks:{color:c.m},title:{display:true,text:'Points Above Expectation',color:c.m}},x:{grid:grid(c),ticks:{color:c.m}}},plugins:{legend:{display:false},tooltip:tip(c)}}});}
   function initAll(){
     const c=gc();
     Chart.defaults.color=c.m;
