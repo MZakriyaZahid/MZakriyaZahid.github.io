@@ -492,7 +492,16 @@
     sC=new Chart(document.getElementById('shapChart').getContext('2d'),{type:'bar',data:{labels:shapLabels,datasets:[{label:'Mean |SHAP|',data:shapValues,backgroundColor:shapValues.map((_,i)=>c.a+Math.round((0.9-i*.1)*255).toString(16).padStart(2,'0')),borderRadius:3}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{min:0,max:.42,grid:grid(c),ticks:{color:c.m}},y:{grid:{display:false},ticks:{color:c.m}}},plugins:{legend:{display:false},tooltip:tip(c)}}});
   }
   function updateChartColors(){initAll();}
-  initAll();
+  /* TRIGGER CHARTS ON SCROLL */
+  let chartsDrawn = false;
+  const chartObserver = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting && !chartsDrawn) {
+      initAll();
+      chartsDrawn = true;
+    }
+  }, { threshold: 0.15 }); 
+  
+  chartObserver.observe(document.getElementById('f1-demo'));
   document.querySelectorAll('.f1-tab').forEach(tab=>{
     tab.addEventListener('click',()=>{
       document.querySelectorAll('.f1-tab').forEach(t=>t.classList.remove('active'));
