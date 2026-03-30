@@ -34,10 +34,10 @@
     body.hovering .cursor-ring{width:48px;height:48px;border-color:var(--accent2);opacity:.9;}
     ::-webkit-scrollbar{width:4px;} ::-webkit-scrollbar-track{background:var(--bg);} ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
     
-    .f1-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;padding:0;width:60px;height:34px;overflow:hidden;}
-    .f1-car{width:55px;height:auto;transition:transform 0.4s cubic-bezier(0.5,0,0.1,1),opacity 0.3s ease;}
-    .f1-car.drive-off{transform:translateX(80px);opacity:0;}
-    .f1-car.drive-in-prep{transform:translateX(-80px);opacity:0;transition:none;}
+    .f1-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;padding:0;width:120px;height:50px;overflow:hidden;}
+.f1-car{width:110px;height:auto;transition:transform 0.4s cubic-bezier(0.5,0,0.1,1),opacity 0.3s ease;}
+.f1-car.drive-off{transform:translateX(150px);opacity:0;}
+.f1-car.drive-in-prep{transform:translateX(-150px);opacity:0;transition:none;}
     .f1-btn::after{content:attr(data-tooltip);position:absolute;top:115%;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--muted);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;}
     .f1-btn:hover::after{opacity:1;}
     
@@ -208,7 +208,7 @@
     </div>
     <div class="nav-right">
       <button class="f1-btn" id="themeToggle" data-tooltip="Toggle Theme" aria-label="Toggle theme">
-        <img src="R25.jpg" alt="F1 Car Toggle" id="f1CarImg" class="f1-car">
+       <img src="R25.png" alt="F1 Car Toggle" id="f1CarImg" class="f1-car">
       </button>
       <a href="Zakriya_Zahid_CV_GEN.pdf" download class="nav-cta">Download CV</a>
     </div>
@@ -402,7 +402,7 @@
   
   if(saved) {
     html.setAttribute('data-theme',saved);
-    f1CarImg.src = saved === 'light' ? 'AMR26.jpg' : 'R25.jpg';
+    f1CarImg.src = saved === 'light' ? 'AMR26.png' : 'R25.png';
   }
 
   toggleBtn.addEventListener('click', e => {
@@ -414,7 +414,7 @@
       html.setAttribute('data-theme', isDark ? 'light' : 'dark');
       localStorage.setItem('zz-theme', isDark ? 'light' : 'dark');
       
-      f1CarImg.src = isDark ? 'AMR26.jpg' : 'R25.jpg';
+      f1CarImg.src = isDark ? 'AMR26.png' : 'R25.png';
       
       const rect = toggleBtn.getBoundingClientRect();
       flash.style.setProperty('--fx',(rect.left+rect.width/2)+'px');
